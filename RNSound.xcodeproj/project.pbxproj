@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		19825A221BD4A89800EE0337 /* RNSound.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 19825A211BD4A89800EE0337 /* RNSound.h */; };
-		19825A241BD4A89800EE0337 /* RNSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 19825A231BD4A89800EE0337 /* RNSound.m */; };
+		49C9DECC28D9270600B05496 /* RNSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C9DEC928D9270600B05496 /* RNSound.swift */; };
+		49C9DECD28D9270600B05496 /* RNSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C9DECA28D9270600B05496 /* RNSound.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -18,7 +18,6 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				19825A221BD4A89800EE0337 /* RNSound.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -26,8 +25,9 @@
 
 /* Begin PBXFileReference section */
 		19825A1E1BD4A89800EE0337 /* libRNSound.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNSound.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		19825A211BD4A89800EE0337 /* RNSound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSound.h; sourceTree = "<group>"; };
-		19825A231BD4A89800EE0337 /* RNSound.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSound.m; sourceTree = "<group>"; };
+		49C9DEC628D9270600B05496 /* RNSound-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNSound-Bridging-Header.h"; sourceTree = "<group>"; };
+		49C9DEC928D9270600B05496 /* RNSound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RNSound.swift; sourceTree = "<group>"; };
+		49C9DECA28D9270600B05496 /* RNSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNSound.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +60,9 @@
 		19825A201BD4A89800EE0337 /* RNSound */ = {
 			isa = PBXGroup;
 			children = (
-				19825A211BD4A89800EE0337 /* RNSound.h */,
-				19825A231BD4A89800EE0337 /* RNSound.m */,
+				49C9DECA28D9270600B05496 /* RNSound.m */,
+				49C9DEC928D9270600B05496 /* RNSound.swift */,
+				49C9DEC628D9270600B05496 /* RNSound-Bridging-Header.h */,
 			);
 			path = RNSound;
 			sourceTree = "<group>";
@@ -97,6 +98,7 @@
 				TargetAttributes = {
 					19825A1D1BD4A89800EE0337 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 1340;
 					};
 				};
 			};
@@ -105,6 +107,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 19825A151BD4A89800EE0337;
@@ -122,7 +125,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19825A241BD4A89800EE0337 /* RNSound.m in Sources */,
+				49C9DECC28D9270600B05496 /* RNSound.swift in Sources */,
+				49C9DECD28D9270600B05496 /* RNSound.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,7 +172,7 @@
 					"$(SRCROOT)/../react-native/React/**",
 					"$(SRCROOT)/node_modules/react-native/React/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -208,7 +212,7 @@
 					"$(SRCROOT)/../react-native/React/**",
 					"$(SRCROOT)/node_moduels/react-native/React/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -218,18 +222,27 @@
 		19825A281BD4A89800EE0337 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNSound/RNSound-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		19825A291BD4A89800EE0337 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNSound/RNSound-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

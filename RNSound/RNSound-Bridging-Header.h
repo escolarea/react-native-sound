@@ -1,0 +1,10 @@
+//
+//  Use this file to import your target's public headers that you would like to expose to Swift.
+//
+
+#import "React/RCTBridgeModule.h"
+#import <Foundation/Foundation.h>
+#import <MediaPlayer/MediaPlayer.h>
+#import <AVKit/AVKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import <AVFAudio/AVFAudio.h>

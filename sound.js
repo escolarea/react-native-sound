@@ -83,6 +83,8 @@ function Sound(filename, basePath, onError, options) {
   this._numberOfLoops = 0;
   this._speed = 1;
   this._pitch = 1;
+
+if(IsAndroid || IsWindows){
   RNSound.prepare(this._filename, this._key, options || {}, (error, props) => {
     if (props) {
       if (typeof props.duration === 'number') {
@@ -98,6 +100,9 @@ function Sound(filename, basePath, onError, options) {
     }
     onError && onError(error, props);
   });
+}else{
+  RNSound.prepare(this._filename)
+}
 }
 
 Sound.prototype.isLoaded = function() {
@@ -106,7 +111,11 @@ Sound.prototype.isLoaded = function() {
 
 Sound.prototype.play = function(onEnd) {
   if (this._loaded) {
-    RNSound.play(this._key, (successfully) => onEnd && onEnd(successfully));
+    if(IsAndroid||IsWindows){
+      RNSound.play(this._key, (successfully) => onEnd && onEnd(successfully));
+    }else{
+      RNSound.play()
+    }
   } else {
     onEnd && onEnd(false);
   }
@@ -115,36 +124,56 @@ Sound.prototype.play = function(onEnd) {
 
 Sound.prototype.pause = function(callback) {
   if (this._loaded) {
-    RNSound.pause(this._key, () => {
-      this._playing = false;
-      callback && callback();
-    });
+    if(IsAndroid||IsWindows){
+      RNSound.pause(this._key, () => {
+        this._playing = false;
+        callback && callback();
+      });
+    }else{
+      RNSound.pause()
+    }
+  
+  }else{
+
   }
   return this;
 };
 
 Sound.prototype.stop = function(callback) {
   if (this._loaded) {
-    RNSound.stop(this._key, () => {
-      this._playing = false;
-      callback && callback();
-    });
+    if(IsAndroid||IsWindows){
+      RNSound.stop(this._key, () => {
+        this._playing = false;
+        callback && callback();
+      });
+    }else{
+      RNSound.stop()
+    }
   }
   return this;
 };
 
 Sound.prototype.reset = function() {
   if (this._loaded && IsAndroid) {
-    RNSound.reset(this._key);
+    if(IsAndroid||IsWindows){
+        RNSound.reset(this._key);
     this._playing = false;
+    }else{
+     RNSound.reset()
+    }
   }
   return this;
 };
 
 Sound.prototype.release = function() {
   if (this._loaded) {
-    RNSound.release(this._key);
-    this._loaded = false;
+    if(IsAndroid && !IsWindows){
+      RNSound.release(this._key);
+      this._loaded = false;
+    }else{
+     RNSound.release()
+    }
+
     if (!IsWindows) {
       if (this.onPlaySubscription != null) {
         this.onPlaySubscription.remove();
@@ -252,7 +281,7 @@ Sound.prototype.setSpeed = function(value) {
 Sound.prototype.setPitch = function(value) {
   this._pitch = value;
   if (this._loaded) {
-    if (IsAndroid) {
+    if (!IsWindows) {
       RNSound.setPitch(this._key, value);
     }
   }
