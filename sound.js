@@ -136,11 +136,7 @@ Sound.prototype.isLoaded = function () {
 
 Sound.prototype.play = function (onEnd) {
   if (this._loaded) {
-    if (IsAndroid || IsWindows) {
-      RNSound.play(this._key, (successfully) => onEnd && onEnd(successfully));
-    } else {
-      RNSound.play(this._key)
-    }
+    RNSound.play(this._key, (successfully) => onEnd && onEnd(successfully));
   } else {
     onEnd && onEnd(false);
   }
