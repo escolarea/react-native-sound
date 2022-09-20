@@ -9,7 +9,6 @@
     "react-native",
     "sound",
     "audio",
-    "ios",
     "android",
     "windows"
   ],
@@ -28,12 +27,8 @@
   },
   "files": [
     "**/*.@(js|ts)",
-    "*.podspec",
     "android/build.gradle",
     "android/src/**/*.@(java|xml)",
-    "RNSound.xcodeproj/project.pbxproj",
-    "RNSound.xcodeproj/project.xcworkspace/contents.xcworkspacedata",
-    "RNSound/**/*.@(h|m)",
     "windows/RNSoundModule/**/*.@(sln|json|xml|csproj)",
     "windows/RNSoundModule/**/*.cs",
     "!scripts"
