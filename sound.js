@@ -85,13 +85,19 @@ function Sound(filename, basePath, onError, options) {
       RNSound.setVolume(this._key, value);
     }
   }
+
   this.setPitch = function (value) {
     this._pitch = value;
     if (this._loaded) {
       RNSound.setPitch(this._key, value);
     }
   }
-
+  this.getVolume = function () {
+    return this._volume
+  }
+  this.getPitch = function () {
+    return this._pitch
+  }
   this.play = function () {
     RNSound.play(this._key)
   }
