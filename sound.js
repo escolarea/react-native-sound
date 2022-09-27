@@ -73,35 +73,6 @@ function Sound(filename, basePath, onError, options) {
       );
     }
   }
-
-  this.stop = function () {
-    if (this._loaded) {
-      RNSound.stop(this._key)
-    }
-  }
-  this.setVolume = function (value) {
-    this._volume = value;
-    if (this._loaded) {
-      RNSound.setVolume(this._key, value);
-    }
-  }
-
-  this.setPitch = function (value) {
-    this._pitch = value;
-    if (this._loaded) {
-      RNSound.setPitch(this._key, value);
-    }
-  }
-  this.getVolume = function () {
-    return this._volume
-  }
-  this.getPitch = function () {
-    return this._pitch
-  }
-  this.play = function () {
-    RNSound.play(this._key)
-  }
-
   this._loaded = false;
   this._key = nextKey++;
   this._playing = false;
@@ -142,7 +113,11 @@ Sound.prototype.isLoaded = function () {
 
 Sound.prototype.play = function (onEnd) {
   if (this._loaded) {
-    RNSound.play(this._key, (successfully) => onEnd && onEnd(successfully));
+    if (IsAndroid || IsWindows) {
+      RNSound.play(this._key, (successfully) => onEnd && onEnd(successfully));
+    } else {
+      RNSound.play(this._key)
+    }
   } else {
     onEnd && onEnd(false);
   }
@@ -161,10 +136,14 @@ Sound.prototype.pause = function (callback) {
 
 Sound.prototype.stop = function (callback) {
   if (this._loaded) {
-    RNSound.stop(this._key, () => {
-      this._playing = false;
-      callback && callback();
-    });
+    if (IsAndroid || IsWindows) {
+      RNSound.stop(this._key, () => {
+        this._playing = false;
+        callback && callback();
+      });
+    } else {
+      RNSound.stop(this._key)
+    }
   }
   return this;
 };
@@ -318,7 +297,6 @@ Sound.prototype.setSpeakerphoneOn = function (value) {
 // ios only
 
 // This is deprecated.  Call the static one instead.
-
 Sound.prototype.setCategory = function (value) {
   if (IsAndroid || IsWindows) {
     Sound.setCategory(value, false);
