@@ -116,7 +116,7 @@ Sound.prototype.play = function (onEnd) {
     if (IsAndroid || IsWindows) {
       RNSound.play(this._key, (successfully) => onEnd && onEnd(successfully));
     } else {
-      RNSound.play(this._key)
+      RNSound.playAll()
     }
   } else {
     onEnd && onEnd(false);
@@ -267,9 +267,7 @@ Sound.prototype.setSpeed = function (value) {
 Sound.prototype.setPitch = function (value) {
   this._pitch = value;
   if (this._loaded) {
-    if (IsAndroid) {
-      RNSound.setPitch(this._key, value);
-    }
+    RNSound.setPitch(this._key, value);
   }
   return this;
 };
