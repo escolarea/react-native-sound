@@ -401,8 +401,8 @@ public class RNSoundModule extends ReactContextBaseJavaModule implements AudioMa
 
   @ReactMethod
   public void setPitch(final Double key, final Float pitch) {
-    float minValue = 0.5f;
-    float maxValue = 2.0f;
+    float minValue = 0.2f;
+    float maxValue = 1.0f;
     float output = (pitch - 0) * (maxValue - minValue) / (1 - 0) + minValue;
 
     if (android.os.Build.VERSION.SDK_INT < 23) {
